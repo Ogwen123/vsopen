@@ -5,8 +5,17 @@
 using namespace std;
 
 string get_name(string line) {
+    char buffer[] = "";
 
+    for (int i = 0; i < 10; i++) {
+        if (line[i] == ',') {
+            return buffer;
+        }
+    }
+    return buffer;
 }
+
+const int MAX_NAME_LENGTH = 20;
 
 int main(int argc, char *argv[]) {
     fstream config_file(R"(C:\Users\Owen\OneDrive\Desktop\vsopen.txt)");
@@ -35,6 +44,19 @@ int main(int argc, char *argv[]) {
                 config_file.close();
                 exit(2);
             }
+
+            string name = argv[2];
+
+            if (name.length() > MAX_NAME_LENGTH) {
+                cout << "Name is too long. The max length is " << MAX_NAME_LENGTH << "." << endl;
+                exit(1);
+            }
+
+            if (name.find(',') < name.length()) {
+                cout << "You name cannot have commas in it." << endl;
+                exit(1);
+            }
+
             string profile = argv[2];
             for (int i = 3; i < argc; i++) {
                 profile += ",";
