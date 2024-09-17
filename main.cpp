@@ -24,9 +24,9 @@ string get_name(string& line) {
 
 vector<string> get_paths(string line) {
     vector<string> paths = {};
-
     vector<char> buffer = {};
     bool passed_name = false;
+
     for (char& c : line) {
         if (c == ',') {
             if (!passed_name) {
@@ -41,6 +41,9 @@ vector<string> get_paths(string line) {
             buffer.push_back(c);
         }
     }
+
+    string str(buffer.begin(), buffer.end());
+    paths.push_back(str);
 
     return paths;
 }
@@ -61,10 +64,10 @@ int main(int argc, char *argv[]) {
             cout << get_name(line) << endl;
             if (get_name(line) != argv[1]) continue;
             vector<string> paths = get_paths(line);
-            for (const string& path : paths) {
-                const char *command = ("code -g " + path).c_str();
-                cout << "running: " << command << endl;
-                system(command);
+            for (string path : paths) {
+                string command = "code \"" + path + "\"";
+                cout << "command: " << command << endl;
+                system(command.c_str());
             }
         }
 
