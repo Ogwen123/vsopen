@@ -22,7 +22,7 @@ string get_name(string& line) {
     return str;
 }
 
-vector<string> get_paths(string line) {
+vector<string> get_paths(string& line) {
     vector<string> paths = {};
     vector<char> buffer = {};
     bool passed_name = false;
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
             cout << get_name(line) << endl;
             if (get_name(line) != argv[1]) continue;
             vector<string> paths = get_paths(line);
-            for (string path : paths) {
+            for (string& path : paths) {
                 string command = "code \"" + path + "\"";
                 cout << "command: " << command << endl;
                 system(command.c_str());
