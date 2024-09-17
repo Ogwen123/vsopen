@@ -7,7 +7,7 @@ open multiple vscode windows in one go
  - reload your command prompt and it should work
 
 ## usage
- - ### vsopen <name>
+ - ### vsopen \<name>
    - open all the folder associated with the name
- - ### vsopen --new <name> <...paths>
+ - ### vsopen --new \<name> <...paths>
    - create a new config
