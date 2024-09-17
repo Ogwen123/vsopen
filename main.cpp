@@ -60,13 +60,11 @@ int main(int argc, char *argv[]) {
         string line;
 
         while (getline(config_file, line)){
-            cout << line << endl;
-            cout << get_name(line) << endl;
             if (get_name(line) != argv[1]) continue;
             vector<string> paths = get_paths(line);
             for (string& path : paths) {
                 string command = "code \"" + path + "\"";
-                cout << "command: " << command << endl;
+
                 system(command.c_str());
             }
         }
