@@ -3,6 +3,8 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <windows.h>
+#include <Lmcons.h>
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +53,14 @@ vector<string> get_paths(string& line) {
 const int MAX_NAME_LENGTH = 20;
 
 int main(int argc, char *argv[]) {
-    fstream config_file(R"(C:\Users\Owen\OneDrive\Desktop\vsopen.txt)");
+    cout << "Reading config file." << endl;
+    char username[UNLEN+1];
+    DWORD username_len = UNLEN+1;
+    GetUserName(username, &username_len);
+
+    string username_string = string(username);
+    cout << "username: " << username_string << endl;
+    fstream config_file(R"(C:\Users\)" + username_string + R"(\OneDrive\Desktop\vsopen.txt)");
     if (!config_file.is_open()) {
         cout << "Cannot open file!" << endl;
         exit(1);
@@ -62,6 +71,7 @@ int main(int argc, char *argv[]) {
         while (getline(config_file, line)){
             if (get_name(line) != argv[1]) continue;
             vector<string> paths = get_paths(line);
+            cout << "Opening " << paths.size() << " folders.";
             for (string& path : paths) {
                 string command = "code \"" + path + "\"";
 
