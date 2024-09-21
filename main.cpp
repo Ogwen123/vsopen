@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
 
     string username_string = string(username);
     cout << "username: " << username_string << endl;
-    fstream config_file(R"(C:\Users\)" + username_string + R"(\OneDrive\Desktop\vsopen.txt)");
+    fstream config_file(R"(C:\Users\)" + username_string + R"(\Desktop\vsopen.txt)");
     if (!config_file.is_open()) {
         cout << "Cannot open file!" << endl;
         exit(1);
